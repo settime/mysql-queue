@@ -31,10 +31,7 @@ class Mysql implements BaseQuery
      */
     public function get($uuid){
         $find =  Db::name('queue')->where('uuid',$uuid)->find();
-        if ($find){
-            return $find->toArray();
-        }
-        return null;
+        return $find;
     }
 
     /**

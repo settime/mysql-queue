@@ -9,7 +9,6 @@
   "require": {
     "php": ">=7.0",
     "topthink/think-orm": "*",
-    "Workerman/Worker" : "*",
     "ext-json": "*"
   },
   "autoload": {
