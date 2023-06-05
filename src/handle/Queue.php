@@ -68,11 +68,11 @@ trait Queue
 
         $max_attempts = $this->config['max_attempts'];
         $retry_seconds = $this->config['retry_seconds'];
-        $queue_item['num'] += 1;
+        $queue_item['run_num'] += 1;
         $queue_item['start_run_time'] = time() + $retry_seconds;
 
         if ($is_check) {
-            if ($queue_item['num'] > $max_attempts) {
+            if ($queue_item['run_num'] > $max_attempts) {
                 return;
             }
         }
