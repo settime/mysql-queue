@@ -124,3 +124,6 @@ CREATE TABLE IF NOT EXISTS `cms_queue_log`  (
 ```shell
   \FlyCms\MysqlQueue\Client::runQueue($uuid);
 ```
+
+## 可视化
+这个我就不写了,你自己直接调用查询数据库就行
