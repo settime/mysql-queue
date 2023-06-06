@@ -46,6 +46,7 @@ class ConsumerServer
      */
     private $consumer_dir;
 
+    private $error_num = 0;
 
     public function __construct($consumer_dir = '')
     {
@@ -62,6 +63,11 @@ class ConsumerServer
         Timer::add(0.2,function (){
             $this->tryInit();
         },[],false);
+
+        //增加一个定时器检测是否短时间出现大量连接错误
+        Timer::add(60,function (){
+            $this->error_num = 0;
+        });
     }
 
     /**
@@ -146,6 +152,11 @@ class ConsumerServer
      * 初始化
      */
     private function tryInit(){
+
+        $this->error_num += 1;
+        if ($this->error_num >= 10){
+            throw new \Exception("消费者无法连接queue-server,请检查配置端口是否正确");
+        }
 
         //读取监听地址
         $listen_address = config('plugin.fly-cms.mysql-queue.app.consumer_register_address');
